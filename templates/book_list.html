@@ -1,0 +1,11 @@
+book_list.html:
+{% for book in books %}
+<tr>
+    <td>{{ book.id }}</td>
+    <td>{{ book.title }}</td>
+</tr>
+{% empty %}
+<tr>
+    <td colspan="2">No books found</td>
+</tr>
+{% endfor %}

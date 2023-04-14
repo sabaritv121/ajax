@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Author List</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Fetch book list for selected author using AJAX
+            $('#author-table').on('click', 'tr', function() {
+                var authorId = $(this).data('author-id');
+                $.ajax({
+                    url: '/book_list/' + authorId + '/',
+                    success: function(data) {
+                        $('#book-table tbody').html(data);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Authors</h1>
+    <table id="author-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for author in authors %}
+            <tr data-author-id="{{ author.id }}">
+                <td>{{ author.id }}</td>
+                <td>{{ author.name }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h1>Books</h1>
+    <table id="book-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</body>
+</html>
